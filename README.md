@@ -127,7 +127,7 @@ This repository builds upon the following open-source projects. We are grateful 
 
 ## 📧 Support
 
-For technical support or questions, contact **Zeroth Intelligence (元点智能)**.
+For technical support or questions, contact **Suzhou JoyIn Technology Co., Ltd**.
 
 ---
 
