@@ -12,7 +12,7 @@
 
 | Isaac Gym 仿真 | 真机部署 |
 |:---:|:---:|
-| ![仿真](docs/M1_walking_in_simulation.gif) | ![真机部署](docs/M1_deploy.gif) |
+| ![仿真](JOYIN_MINI_DEPLOY/demos/M1_walking_in_simulation.gif) | ![真机部署](JOYIN_MINI_DEPLOY/demos/M1_deploy.gif) |
 | *Isaac Gym 中的策略训练* | *在 M1 硬件上部署* |
 
 </div>

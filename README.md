@@ -12,7 +12,7 @@ This repository contains the **reinforcement learning policy deployment framewor
 
 | Isaac Gym Simulation | Real Robot Deployment |
 |:---:|:---:|
-| ![Simulation](docs/M1_walking_in_simulation.gif) | ![Real Robot](docs/M1_deploy.gif) |
+| ![Simulation](JOYIN_MINI_DEPLOY/demos/M1_walking_in_simulation.gif) | ![Real Robot](JOYIN_MINI_DEPLOY/demos/M1_deploy.gif) |
 | *Policy training in Isaac Gym* | *Deployed on Zeroth M1 hardware* |
 
 </div>
