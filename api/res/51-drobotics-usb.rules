@@ -1,0 +1,9 @@
+# Devices listed here are connected by USB
+
+# SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", ATTRS{idProduct}=="4e22", SYMLINK+="android_adb", MODE="0666"
+
+# android devices 
+SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", GROUP="plugdev", MODE="0666"
+
+# horizon devices 
+SUBSYSTEM=="usb", ATTRS{idVendor}=="3652", GROUP="plugdev", MODE="0666"
