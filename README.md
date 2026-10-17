@@ -24,13 +24,14 @@ This repository contains the **reinforcement learning policy deployment framewor
 | File/Directory | Description |
 |---|---|
 | **demo_walk.py** | Main walking demo - deploys RL policy for locomotion control |
+| **demo_walk_estimator.py** | Walking demo for deployment of the estimator model |
 | **control_system.py** | ROS2 control system class for subscribing to robot sensor data (IMU, joint states) and publishing joint commands |
 | **spin_control_system.py** | Observation data readback example program |
 | **config_mini.yaml** | Robot configuration file containing default joint angles, zero-position offsets, observation dimensions, and scaling factors |
 | **udp_sender.py** | Real-time data streaming class for sending telemetry to PlotJuggler via UDP |
 | **model/** | Directory for storing trained RL policies in ONNX format |
 | **pylibs/** | Python dependencies and libraries required for deployment |
-| **trajectory_replay.py** | Trajectory replay utility for validating policy responses against simulation data |
+
 
 ---
 

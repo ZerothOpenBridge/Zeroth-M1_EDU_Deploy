@@ -24,13 +24,13 @@
 | 文件/目录 | 说明 |
 |---|---|
 | **demo_walk.py** | 行走演示程序 - RL 策略部署的主入口，实现机器人运动控制 |
+| **demo_walk.py** | 估计器模型示例程序 |
 | **control_system.py** | ROS2 控制系统类 - 订阅机器人传感器数据（IMU、关节状态）并发布关节控制指令 |
 | **spin_control_system.py** | 观测数据回读示例程序 |
 | **config_mini.yaml** | 机器人配置文件 - 包含默认关节角度、零位偏置、观测维度、缩放因子等参数 |
 | **udp_sender.py** | 实时数据流类 - 通过 UDP 协议向 PlotJuggler 发送遥测数据 |
 | **model/** | 存放训练好的 RL 策略模型（ONNX 格式） |
 | **pylibs/** | 部署所需的 Python 依赖库 |
-| **trajectory_replay.py** | 轨迹回放工具 - 用于对比仿真与真机的策略响应 |
 
 ---
 
