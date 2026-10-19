@@ -66,9 +66,9 @@ ifconfig wlan0
 
 See: [https://github.com/Zeroth-OpenBridge](https://github.com/Zeroth-OpenBridge)
 
-Setup your own training environment for M1 edu here: [JOYIN_MINI_GYM](JOYIN_MINI_GYM/README.md)
+Setup your own training environment for M1 edu here: [JOYIN_MINI_GYM](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Train)
 
-Once your policy verified in the simulation environment, deploy here: [JOYIN_MINI_DEPLOY](JOYIN_MINI_DEPLOY/README.md) 
+Once your policy verified in the simulation environment, deploy here: [JOYIN_MINI_DEPLOY](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy)
 
 **Important:** When establishing your custom codes (i.e., giving joint angle commands or vehicle speed commands), please ensure that the default embedded `control_pm` node (in `run.sh`) is shut down:
 
@@ -562,7 +562,7 @@ for i in range(12):
 joint_angles_pub.publish(msg)
 ```
 
-See [control_system.py](JOYIN_MINI_DEPLOY/control_system.py) for a complete RL deployment example with offset/direction transformations.
+See [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy/blob/main/JOYIN_MINI_DEPLOY/control_system.py) for a complete RL deployment example with offset/direction transformations.
 
 **`/ControlMotorSpeed_topic`** — Set maximum speed limit for all 20 joints:
 
@@ -582,7 +582,7 @@ joint_velocitys_pub.publish(msg)
 
 This sets the speed ceiling for motion commands. Lower values produce slower, more controlled movements; higher values allow faster transitions. The value is in servo encoder ticks per second, where 4090 represents near-maximum speed capability(default).
 
-See [control_system.py](JOYIN_MINI_DEPLOY/control_system.py) `publish_joint_velocity_value_command()` for the implementation.
+See [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy/blob/main/JOYIN_MINI_DEPLOY/control_system.py) `publish_joint_velocity_value_command()` for the implementation.
  
 
 
@@ -621,7 +621,7 @@ for i in range(20):
 
 **Important:** default value kp(20), kd(2) are used for motor system identification, changes of PID gains would lead to issues in RL model sim2real transfer.
 
-See [control_system.py](JOYIN_MINI_DEPLOY/control_system.py) `publish_joint_pid_ctrl_command()` for the implementation.
+See [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy/blob/main/JOYIN_MINI_DEPLOY/control_system.py) `publish_joint_pid_ctrl_command()` for the implementation.
 
 
 
@@ -648,7 +648,7 @@ See [control_system.py](JOYIN_MINI_DEPLOY/control_system.py) `publish_joint_pid_
 | Head pitch                | -40 ~ 25        |
 
 
-caution: exceed these ranges can cause servo failures or damages. The zero point for the joint raw angles of M1 correspond to a crouch pose (for calibration usage). In RL deployment, use the standard-form joint angle, see `kinematic_state_feedback_msg_callback` in [control_system.py](JOYIN_MINI_DEPLOY/control_system.py).   
+caution: exceed these ranges can cause servo failures or damages. The zero point for the joint raw angles of M1 correspond to a crouch pose (for calibration usage). In RL deployment, use the standard-form joint angle, see `kinematic_state_feedback_msg_callback` in [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy/blob/main/JOYIN_MINI_DEPLOY/control_system.py).   
 
 ### Factory Action
 
@@ -752,9 +752,9 @@ MCU requires **exactly 6** `int16` values (otherwise the command is dropped):
 
 
 ```bash
-# Look roughly forward (yaw=0, pitch=0); non-zero speeds required by many MCU paths
-# /ControlHeadControl_topic 需要叠加零点才能移动到正确位置，通过 /ControlHeadMotion_topic 发送0角度指令，echo/ControlHeadControl_topic 查阅在0角度时头部舵机的零点
-# /ControlHeadMotion_topic 的单位为0.1°
+# Look roughly forward (yaw=0, pitch=0); non-zero speeds are required by many MCU paths
+# /ControlHeadControl_topic needs the zero offset added to move to the correct position. Send a 0-angle command via /ControlHeadMotion_topic, then echo /ControlHeadControl_topic to check the head servo zero point at 0°
+# /ControlHeadMotion_topic uses units of 0.1°
 
 ros2 topic pub /ControlHeadControl_topic std_msgs/msg/Int16MultiArray  "{data: [0, 0, 100, 100, 0, 0]}" --once
 
@@ -956,7 +956,7 @@ ros2 param get /hardware hardware.MCU.status
 | Sensor   | Publish                                                                                                                                       | Subscribe / Service                                                                                                                                                     |
 | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | IMU      | `/HardwareImuBipedMotion_topic` (~200 Hz, **recommended**), `/HardwareImuStd_topic` (~100 Hz, same payload / legacy), `/HardwareImuCal_topic` | `/ControlImuCal_topic`                                                                                                                                                  |
-| Joints   | `/HardwareKinematic_topic`, `/HardwareMotorLoad_topic`, `/HardwareMotorCurrent_topic`, `/HardwareMotorTemp_topic`, `/HardwareMotorErr_topic`  | `/ControlMotorAngles_topic`, `/ControlMotorSpeed_topic`, `/ControlMotorRangeSet_topic`, `/ControlEnableMotor_topic`, `/ControlPidControl_topic`, `/ControlGetPid_topic` |
+| Joints   | `/ControlMotorAngles_topic`, `/ControlMotorSpeed_topic`, `/ControlMotorRangeSet_topic`, `/ControlEnableMotor_topic`, `/ControlPidControl_topic`, `/ControlGetPid_topic` | `/HardwareKinematic_topic`, `/HardwareMotorLoad_topic`, `/HardwareMotorCurrent_topic`, `/HardwareMotorTemp_topic`, `/HardwareMotorErr_topic` |
 | LiDAR    | `/HardwareLidar_topic`                                                                                                                        | `/lidar_enable`, `/lidar_disable`                                                                                                                                       |
 | iTOF     | `/HardwareItof/point_cloud`, `/HardwareItof/depth_image`, `/HardwareItof/gray_image`, `/HardwareItof/camera_info`                             | `/itof_enable`, `/itof_disable` (placeholders)                                                                                                                          |
 | Camera   | `/camera/image_jpeg`, `/camera/image_h264`, `/camera/jpeg_high_resolution`                                                                    | —                                                                                                                                                                       |

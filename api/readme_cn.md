@@ -66,9 +66,9 @@ ifconfig wlan0
 
 参见：[https://github.com/Zeroth-OpenBridge](https://github.com/Zeroth-OpenBridge)
 
-在此设置 M1 edu 的训练环境：[JOYIN_MINI_GYM](JOYIN_MINI_GYM/README.md)
+在此设置 M1 edu 的训练环境：[JOYIN_MINI_GYM](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Train)
 
-在模拟环境中验证策略后，在此部署：[JOYIN_MINI_DEPLOY](JOYIN_MINI_DEPLOY/README.md) 
+在模拟环境中验证策略后，在此部署：[JOYIN_MINI_DEPLOY](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy)
 
 **重要提示：** 当建立自定义代码（即发送关节角度命令或车轮速度命令）时，请确保关闭默认嵌入的 `control_pm` 节点（在 `run.sh` 中）：
 
@@ -564,7 +564,7 @@ for i in range(12):
 joint_angles_pub.publish(msg)
 ```
 
-参见 [control_system.py](JOYIN_MINI_DEPLOY/control_system.py)，获取包含偏移/方向转换的完整 RL 部署示例。
+参见 [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy/blob/main/JOYIN_MINI_DEPLOY/control_system.py)，获取包含偏移/方向转换的完整 RL 部署示例。
 
 **`/ControlMotorSpeed_topic`** — 设置所有 20 个关节的最大速度限制：
 
@@ -584,7 +584,7 @@ joint_velocitys_pub.publish(msg)
 
 这设置了运动命令的速度上限。较低的值产生较慢、更受控的运动；较高的值允许更快的过渡。该值以舵机编码器 ticks/s 为单位，其中 4090 表示接近最大速度能力（默认）。
 
-参见 [control_system.py](JOYIN_MINI_DEPLOY/control_system.py) `publish_joint_velocity_value_command()` 了解实现。
+参见 [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy/blob/main/JOYIN_MINI_DEPLOY/control_system.py) `publish_joint_velocity_value_command()` 了解实现。
  
 
 
@@ -623,7 +623,7 @@ for i in range(20):
 
 **重要：** PID 调整影响舵机响应特性。最初使用保守值，逐步调整。每个关节按顺序接收自己的 PID 消息，有小延迟以避免压垮 MCU 消息队列。
 
-参见 [control_system.py](JOYIN_MINI_DEPLOY/control_system.py) `publish_joint_pid_ctrl_command()` 了解实现。
+参见 [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy/blob/main/JOYIN_MINI_DEPLOY/control_system.py) `publish_joint_pid_ctrl_command()` 了解实现。
 
 
 **机械限位（原始角度）：**
@@ -648,7 +648,7 @@ for i in range(20):
 | 头俯仰             | -40 ~ 25    |
 
 
-注意：超出这些范围可能导致舵机故障或损坏。M1 的关节原始角度的零点对应于蹲姿（用于校准）。在 RL 部署中，使用标准形式的关节角度，参见 [control_system.py](JOYIN_MINI_DEPLOY/control_system.py) 中的 `kinematic_state_feedback_msg_callback`。   
+注意：超出这些范围可能导致舵机故障或损坏。M1 的关节原始角度的零点对应于蹲姿（用于校准）。在 RL 部署中，使用标准形式的关节角度，参见 [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy/blob/main/JOYIN_MINI_DEPLOY/control_system.py) 中的 `kinematic_state_feedback_msg_callback`。   
 
 ### 工厂动作
 
@@ -956,7 +956,7 @@ ros2 param get /hardware hardware.MCU.status
 | 传感器   | 发布                                                                                                                                       | 订阅 / 服务                                                                                                                                                     |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | IMU      | `/HardwareImuBipedMotion_topic`（~200 Hz，**推荐**），`/HardwareImuStd_topic`（~100 Hz，相同载荷/旧版），`/HardwareImuCal_topic` | `/ControlImuCal_topic`                                                                                                                                          |
-| 关节     | `/HardwareKinematic_topic`，`/HardwareMotorLoad_topic`，`/HardwareMotorCurrent_topic`，`/HardwareMotorTemp_topic`，`/HardwareMotorErr_topic`  | `/ControlMotorAngles_topic`，`/ControlMotorSpeed_topic`，`/ControlMotorRangeSet_topic`，`/ControlEnableMotor_topic`，`/ControlPidControl_topic`，`/ControlGetPid_topic` |
+| 关节     | `/ControlMotorAngles_topic`，`/ControlMotorSpeed_topic`，`/ControlMotorRangeSet_topic`，`/ControlEnableMotor_topic`，`/ControlPidControl_topic`，`/ControlGetPid_topic` | `/HardwareKinematic_topic`，`/HardwareMotorLoad_topic`，`/HardwareMotorCurrent_topic`，`/HardwareMotorTemp_topic`，`/HardwareMotorErr_topic` |
 | LiDAR    | `/HardwareLidar_topic`                                                                                                                     | `/lidar_enable`，`/lidar_disable`                                                                                                                               |
 | iTOF     | `/HardwareItof/point_cloud`，`/HardwareItof/depth_image`，`/HardwareItof/gray_image`，`/HardwareItof/camera_info`                         | `/itof_enable`，`/itof_disable`（占位符）                                                                                                                       |
 | 相机     | `/camera/image_jpeg`，`/camera/image_h264`，`/camera/jpeg_high_resolution`                                                                 | —                                                                                                                                                               |
