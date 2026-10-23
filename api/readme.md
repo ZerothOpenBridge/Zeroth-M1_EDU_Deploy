@@ -588,19 +588,46 @@ See [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy
 
 **`/ControlEnableMotor_topic` payload:**
 
-`data[0]` — Motor torque control:
-- `0x00`: Disable torque output
+`data[0]` — Overall torque control for all joints:
+- `0x00`: Disable torque output for all joints
 - `0x01`: Enable torque output
-- `0x80`: Set current position as center value (do not send outside calibration process)
+- `0x80`: Set the current position as the center value (only during calibration; do not send otherwise)
 
-`data[1]` — Individual motor enable/disable (bit field, 0 = disabled, 1 = enabled):
+`data[1]` — Per-part enable mask (bit field, `0 = disabled`, `1 = enabled`):
 - `bit0`: Left arm
 - `bit1`: Right arm
 - `bit2`: Head
 - `bit3`: Legs
 - `bit4`: Head yaw
 - `bit5`: Head pitch
-- `bit6`: Fall protection auto-release (0 = enable auto-release on fall detection, 1 = disable)
+- `bit6`: Fall protection auto-release (`0 = enable auto-release on fall detection`, `1 = disable`)
+- `bit7`: Head yaw auto-release (`0 = enable`, `1 = disable`)
+
+Example: disable the left arm only. In SSH, run:
+
+```bash
+ros2 topic pub /ControlEnableMotor_topic std_msgs/UInt8MultiArray "data: [1, 62]" --once
+```
+
+This uses the bitmask `0b00111110 = 62`:
+
+```text
+0b00111110 = 62
+  ││││││└─ bit0 = 0 (left arm disabled)
+  │││││└── bit1 = 1 (right arm enabled)
+  ││││└─── bit2 = 1 (head enabled)
+  │││└──── bit3 = 1 (legs enabled)
+  ││└───── bit4 = 1 (head yaw enabled)
+  │└────── bit5 = 1 (head pitch enabled)
+  └─────── bit6 = 0 (reserved / unused)
+```
+
+Notes:
+- `data[0] = 0` disables all joints.
+- `data[0] = 1` enables torque output globally.
+- To disable specific parts, change the second byte (`data[1]`) using the bit mask above.
+
+
 
 **`/ControlPidControl_topic`** — Configure PID parameters for individual joints:
 
