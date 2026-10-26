@@ -760,7 +760,7 @@ Charge control: `/BusinessEnableCharge_topic` (`std_msgs/UInt8`)
 
 Timestamped MCU path is decimated (~publish every 10th sample). Match publisher QoS (`best_effort`).
 
-Mechanical limits (degrees): yaw **-90 ~ 90**, pitch **-40 ~ 25**.
+Mechanical limits (degrees): yaw **-50 ~ 85**, pitch **-30 ~ 30**.
 
 
 ### 12.2 Control — `/ControlHeadControl_topic`
