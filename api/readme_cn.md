@@ -668,8 +668,8 @@ for i in range(20):
 | 右膝俯仰           | -60 ~ 155   |
 | 左踝俯仰           | -70 ~ 145   |
 | 右踝俯仰           | -145 ~ 70   |
-| 头偏航             | -90 ~ 90    |
-| 头俯仰             | -40 ~ 25    |
+| 头偏航             | -50 ~ 85    |
+| 头俯仰             | -30 ~ 30    |
 
 
 注意：超出这些范围可能导致舵机故障或损坏。M1 的关节原始角度的零点对应于蹲姿（用于校准）。在 RL 部署中，使用标准形式的关节角度，参见 [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy/blob/main/JOYIN_MINI_DEPLOY/control_system.py) 中的 `kinematic_state_feedback_msg_callback`。   

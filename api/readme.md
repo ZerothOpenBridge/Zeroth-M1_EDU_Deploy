@@ -671,8 +671,8 @@ See [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy
 | Right knee pitch          | -60 ~ 155       |
 | Left ankle pitch          | -70 ~ 145       |
 | Right ankle pitch         | -145 ~ 70       |
-| Head yaw                  | -90 ~ 90        |
-| Head pitch                | -40 ~ 25        |
+| Head yaw                  | -50 ~ 85        |
+| Head pitch                | -30 ~ 30        |
 
 
 caution: exceed these ranges can cause servo failures or damages. The zero point for the joint raw angles of M1 correspond to a crouch pose (for calibration usage). In RL deployment, use the standard-form joint angle, see `kinematic_state_feedback_msg_callback` in [control_system.py](https://github.com/ZerothOpenBridge/Zeroth-M1_EDU_Deploy/blob/main/JOYIN_MINI_DEPLOY/control_system.py).   
